@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <title>Code Quiz</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="./assets/style.css">
-  </head> 
+<head>
+  <title>Coding Quiz</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
 
-  <body>
-      <div>
-            <header>
-             <h1>Coding Quiz </h1>
-           </header>
+<body>
+  <nav>
+    <div id="nav">
+      <div class="topleft">
+        <a class="viewHighScores">
+          <h3>View High Scores</h3>
+        </a>
       </div>
+      <div class = "card-timer">
+          <h3>Seconds Remaining:</h3>
+          <div class="large-font timer-count">60</div>
+        </div>
 
-    <main>
+      </div>
+    </div>
+    </nav>
+    <header>
+      <h1>Coding Quiz </h1>
+    </header>
+  <main>
     <section>
       <div class="container">
-        <h2>You will be asked 8 multiple choice questions. Any questions answered incorrectly will decrease the time given
+        <h2>You will be asked 8 multiple choice questions. Any questions answered incorrectly will decrease the time
+          given
           by 5 seconds.
           <p>Your score will be logged as the number of seconds remaining when quiz is completed.</p>
         </h2>
@@ -31,20 +44,15 @@
         </div>
       </div>
     </section>
-    
 
+    <!--Insert section for quiz questions, alerts for right vs wrong, and quiz results  -->
 
     <section>
-      <div class="card-timer">
-        <div class="timer-text"></div>
-        <h3>Seconds Remaining:</h3>
-        <div class="large-font timer-count">60</div>
-      </div>
+      
     </section>
-    
-    </main>
-    <script src="./assets/script.js"></script>
-  </body>
+    <!-- Insert section for input of user  initials and submit score button to listOfHighScores -->
+  </main>
+  <script src="./assets/script.js"></script>
+</body>
+
 </html>
-
-

@@ -12,9 +12,6 @@
 
 
 
-var numbOfQuestions = 8;
-var maxTime = 60;
-var userScore = [ ];
 
 
 
@@ -61,13 +58,30 @@ var questions = [
     },
 ];
 
-// The init function is called when the page loads 
-function init() {
+var numbOfQuestions = 8;
+var maxTime = 60;
+var userScore = [ ];
+var highScoresButton = document.querySelector("#viewHighScores");
+// var listOfHighScores = [ ]
+
+
+
+highScoresButton.addEventListener("click", function () {
+    document.getElementById("viewHighScores");
     var viewHighScores = JSON.parse(localStorage.getItem("userScore"));
     if (viewHighScores !== null) {
         userScore = viewHighScores;
     }
-}
+});
+
+
+// // The init function is called when the page loads 
+// function init() {
+//     var viewHighScores = JSON.parse(localStorage.getItem("userScore"));
+//     if (viewHighScores !== null) {
+//         userScore = viewHighScores;
+//     }
+// }
 
 function startQuiz() {
 
@@ -110,12 +124,11 @@ function submitScore() {
 var startButton = document.querySelector("#startQuiz");
 var submitScoreButton = document.querySelector("#submitScore");
 var restartButton = document.querySelector("#restartQuiz");
-var highscoresButton = document.querySelector("#viewHighscores");
+
 
 startButton.addEventListener("click", startQuiz);
 submitScoreButton.addEventListener("click", submitScore);
-highscoresButton.addEventListener("click", viewHighScores);
-init();
-
+highScoresButton.addEventListener("click", viewHighScores);
 restartButton.addEventListener("click", restartQuiz);
 
+init();
