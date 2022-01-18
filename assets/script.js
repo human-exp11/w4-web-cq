@@ -11,16 +11,45 @@
 // THEN I can save my initials and my score
 
 
-var startButton = document.querySelector("#start-quiz");
+var startButton = document.querySelector("#startQuiz");
+var count = 0;
+var maxTime = 60;
+var points = 0;
+var nextButton =   ;
+
+
+var questions = [ 
+    {
+        asked: "Which structure of code allows you to repeat the same action or actions a specified number of times?",
+        choices: ["repeat", "for loop", "do while", "do loop"],
+        answer: "alert"
+    },
+    {
+        asked: "Which scope is at the top level and applies to all code below?",
+        choices: ["National", "Wordly", "Global", "Above All"],
+        answer: "alert"
+    },
+];
+
+ 
+// Method that joins several arrays and returns a new array? A= concat
+
+// Method that adds a new element at the end of an array? A = push
+
+// Function that opens up "OK/Cancel" within browser window & returns T/F? A= Confirm ()
+
+// Which funtion will break up a string and return an integer? A= parseInt
+
+// What is "DOM" short for?  A=Document Object Model
+
+// Which method adds list items to the end of existing items under the same parent? A= appendChild
+// 
+
 
 // The init function is called when the page loads 
 function init() {
     highScores();
 }
-
-
-
-
 
 
 

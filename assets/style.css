@@ -61,7 +61,7 @@ button {
     padding-bottom: 30px;
 }
   
-.card {
+.card-timer {
     display: block;
     background: radial-gradient(circle, red 0%, rgba(187,124,33,0.604079131652661) 100%);
     border-radius: 8px;
@@ -69,11 +69,11 @@ button {
     margin: 60px auto;
     padding: 5px;
     width: 30vw;
-    text-align: center;
-    padding-top: 20px;
+    text-align: center; 
 }
 
 .large-font {
     font-size: 3.5em;
     text-align:center;
 }
+
