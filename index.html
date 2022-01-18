@@ -11,44 +11,40 @@
 
 <body>
   <nav>
-    <div id="nav">
-      <div class="topleft">
-        <a class="viewHighScores">
-          <h3>View High Scores</h3>
-        </a>
-      </div>
-      <div class = "card-timer">
-          <h3>Seconds Remaining:</h3>
-          <div class="large-font timer-count">60</div>
-        </div>
-
-      </div>
+    <div class="topleft">
+      <a class="viewHighScores">
+        <h3>View High Scores</h3>
+      </a>
     </div>
-    </nav>
-    <header>
-      <h1>Coding Quiz </h1>
-    </header>
+    <div class="card-timer">
+      <h3>Seconds Remaining:</h3>
+      <div class="large-font" id="timer-count">60</div>
+    </div>
+    </div>
+  </nav>
+  <header>
+    <h1>Coding Quiz </h1>
+  </header>
   <main>
-    <section>
-      <div class="container">
-        <h2>You will be asked 8 multiple choice questions. Any questions answered incorrectly will decrease the time
-          given
-          by 5 seconds.
-          <p>Your score will be logged as the number of seconds remaining when quiz is completed.</p>
-        </h2>
-        <h4>Are You Ready? </h4>
-        <div class="wrapper">
-          <div class="button">
-            <button id="startQuiz">Start Quiz</button>
-          </div>
+    <section class="container">
+      <h2>You will be asked 8 multiple choice questions. Any questions answered incorrectly will decrease the time
+        given
+        by 5 seconds.
+        <p>Your score will be logged as the number of seconds remaining when quiz is completed.</p>
+      </h2>
+      <h4>Are You Ready? </h4>
+      <div class="wrapper">
+        <div class="button">
+          <button id="startQuiz">Start Quiz</button>
         </div>
       </div>
     </section>
 
     <!--Insert section for quiz questions, alerts for right vs wrong, and quiz results  -->
 
-    <section>
-      
+    <section id="quizQuestions" class="hide">
+
+
     </section>
     <!-- Insert section for input of user  initials and submit score button to listOfHighScores -->
   </main>

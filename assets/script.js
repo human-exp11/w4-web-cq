@@ -12,7 +12,7 @@
 
 
 
-
+var quizQuestionsEl = document.querySelector("#quizQuestions");
 
 
 var questions = [ 
@@ -58,10 +58,13 @@ var questions = [
     },
 ];
 
-var numbOfQuestions = 8;
+var numbOfQuestion = 0;
 var maxTime = 60;
-var userScore = [ ];
-var highScoresButton = document.querySelector("#viewHighScores");
+var timeRem = 0;
+var timer;
+var timerElement = document.getElementById("timer-count");
+var userScore = 0;
+var highScoresButton = document.querySelector(".viewHighScores");
 // var listOfHighScores = [ ]
 
 
@@ -84,25 +87,32 @@ highScoresButton.addEventListener("click", function () {
 // }
 
 function startQuiz() {
+    beginTimer ();
+    var containerEl = document.querySelector(".container");
+    containerEl.classList.add("hide");
+    
+    quizQuestionsEl.classList.remove("hide");
+    displayQuestions();
 
 }
+function displayQuestions() {
+    var questionDiv = document.createElement("div");
+    questionDiv.textContent = questions [numbOfQuestion].asked;
+    quizQuestionsEl.append(questionDiv);
+
+    // create buttons and append them here
+}
+
 
 // The setTimer function starts and stops the timer and triggers winGame() and loseGame()
 function beginTimer() {
-    // Sets timer
+    timeRem = 60;
     timer = setInterval(function () {
-        timerCount--;
-        timerElement.textContent = timerCount;
-        if (timerCount >= 0) {
-            // Tests if win condition is met
-            if (answeredAll && timerCount > 0) {
-                // Clears interval and stops timer
-                clearInterval(timer);
-                gameOver();
-            }
-        }
+        timeRem--;
+        timerElement.textContent = timeRem;
+
         // Tests if time has run out
-        if (timerCount === 0) {
+        if (timeRem=== 0) {
             // Clears interval
             clearInterval(timer);
             timesUp();
@@ -113,6 +123,9 @@ function beginTimer() {
 
  
 function restartQuiz() {
+    clearInterval(timer);
+    userScore = 0;
+    timeRem = 0;
  
 }
 
@@ -122,13 +135,13 @@ function submitScore() {
 
 
 var startButton = document.querySelector("#startQuiz");
-var submitScoreButton = document.querySelector("#submitScore");
+// var submitScoreButton = document.querySelector("#submitScore");
 var restartButton = document.querySelector("#restartQuiz");
 
 
 startButton.addEventListener("click", startQuiz);
-submitScoreButton.addEventListener("click", submitScore);
-highScoresButton.addEventListener("click", viewHighScores);
-restartButton.addEventListener("click", restartQuiz);
+// submitScoreButton.addEventListener("click", submitScore);
+// highScoresButton.addEventListener("click", viewHighScores);
+// restartButton.addEventListener("click", restartQuiz);
 
-init();
+// init();

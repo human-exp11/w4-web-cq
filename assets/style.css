@@ -27,7 +27,12 @@ h4 {
     margin-top: 0.45em;
     margin-bottom: 0.45em;
 }
-  
+
+nav {
+    display: flex;
+    justify-content: space-be;
+}
+
 .container {
     display: block;
     margin: 60px auto;
@@ -77,3 +82,6 @@ button {
     text-align:center;
 }
 
+.hide {
+    display: none;
+}
