@@ -11,6 +11,14 @@
 // THEN I can save my initials and my score
 
 
+var startButton = document.querySelector("#start-quiz");
+
+// The init function is called when the page loads 
+function init() {
+    highScores();
+}
+
+
 
 
 
@@ -22,25 +30,25 @@
 // The setTimer function starts and stops the timer and triggers winGame() and loseGame()
 function beginTimer() {
     // Sets timer
-    timer = setInterval(function() {
-      timerCount--;
-      timerElement.textContent = timerCount;
-      if (timerCount >= 0) {
-        // Tests if win condition is met
-        if (answeredAll && timerCount > 0) {
-          // Clears interval and stops timer
-          clearInterval(timer);
-          gameOver();
+    timer = setInterval(function () {
+        timerCount--;
+        timerElement.textContent = timerCount;
+        if (timerCount >= 0) {
+            // Tests if win condition is met
+            if (answeredAll && timerCount > 0) {
+                // Clears interval and stops timer
+                clearInterval(timer);
+                gameOver();
+            }
         }
-      }
-      // Tests if time has run out
-      if (timerCount === 0) {
-        // Clears interval
-        clearInterval(timer);
-        timesUp();
-      }
+        // Tests if time has run out
+        if (timerCount === 0) {
+            // Clears interval
+            clearInterval(timer);
+            timesUp();
+        }
     }, 1000);
-  }
+}
 
 
   // These functions are used by init
@@ -55,5 +63,9 @@ function highScores() {
       winCounter = storedResults;
     }
     //Render win count to page
-    win.textContent = winCounter;
+    score.textContent = winCounter;
   }
+
+  init();
+
+
