@@ -4,9 +4,25 @@ const nextButton = document.getElementById('next-btn');
 const questionContainerElement = document.getElementById('question-container');
 const questionElement = document.getElementById('question');
 const answerButtonsElement = document.getElementById('answer-buttons');
+var timerElement = document.getElementById('timer-count');
 
 
 let shuffledQuestions, currentQuestionIndex;
+
+//The setTimer function starts and stops the timer and triggers winGame() and loseGame()
+function beginTimer() {
+    timeRem = 60;
+    timer = setInterval(function () {
+    timeRem--;
+    timerElement.textContent = timeRem;
+//Tests if time has run out
+         if (timeRem=== 0) {
+// Clears interval
+             clearInterval(timer);
+             timesUp();
+       }
+  }, 1000);
+}
 
 beginButton.addEventListener('click', beginQuiz);
 nextButton.addEventListener('click', () => {
