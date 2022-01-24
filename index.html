@@ -1,132 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <title>Coding Quiz</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./assets/style.css">
+  <title>Coding Quiz</title>
 </head>
 
-
 <body>
-  <nav>
-    <div class="topleft">
-      <a id="viewHighScores">
-        <h3>View High Scores</h3>
-      </a>
-    </div>
+  <!-- <nav>
     <div class="card-timer">
-      <h3>Seconds Remaining:</h3>
+      <h3>Seconds Remaining: </h3>
       <div id="timer-count">60</div>
     </div>
+    <div>
+      <button class="view-scores">View High Scores</button>
+      </div>
     </div>
-  </nav>
-  <main>
-    <section class="container">
-      <div class="openingPage">
-        <h2>You will be asked 8 multiple choice questions. Any questions answered incorrectly will decrease the time
-          given
-          by 5 seconds.
-          <p>Your score will be logged as the number of seconds remaining when quiz is completed.</p>
-        </h2>
-        <h4>Are You Ready? </h4>
-        <!-- <div class="wrapper"> -->
-        <div class="startButton">
-          <button class = "btn" id="startQuiz">Start Quiz</button>
+  </nav> -->
+
+    <div class="container">
+      <div id= "question-container" class="hide">
+        <div id="question">Question: </div>
+        <div id="answer-buttons" class="grid-for-btns">
+          <button class="btn">Answer 1</button>
+          <button class="btn">Answer 2</button>
+          <button class="btn">Answer 3</button>
+          <button class="btn">Answer 4</button>
         </div>
       </div>
-    </section>
-    
-    <section id="quizQuestions" class="hide">
-      <div class="containerQuestions">
-        <div id="question"></div>
-        <div id="choiceBtns" class="btn-grid"></div>
-    </div>
+      <div class="user-controls">
+        <button id="begin-btn" class="begin-btn btn">Begin Quiz</button>
+        <button id="next-btn" class="next-btn btn hide">Next Question</button>
+        <!-- <button id="try-again" class="again-btn btn hide">Try Again</button>
+        <button id="submit-score" class="submit-btn btn hide">Submit Score</button> -->
+      </div>
+     </div>
 
-
-    </section>
-
-    <section id="initialsContainer" class = "hide">
-      <div id = endOfGame></div>
-      <form id="userInitials" class="initials">
-        <p>Please Enter Your Initials: <input type="text" name="initials" id="initials" class="userInitials" />
-          <button class="submit" id="submitScore" type="submit">Click to Submit</button>
-        </p>
-      </form>
-    </section>
-  
-
-  </main>
-  <script src="script.js"></script>
+ <script src="assets\script.js"></script>
 </body>
-
 </html>
-
-
-
-<!-- <body>
-  <nav>
-    <div id = "nav" class="topLeft">
-      <a id="viewHighScores"></a> 
-        <h3>View High Scores</h3>
-    </div>
-
-    <div id="cardTimer" class= "topRight">
-      <h3>Seconds Remaining: <span id= "timer-count">60</span></h3>
-    </div>
-  </nav>
-
-  <header>
-    <h1>Coding Quiz </h1>
-  </header>
-
-
-  <main>
-    <section class="container" id= "questionSection">
-      <h2>You will be asked 8 multiple choice questions. Any questions answered incorrectly will decrease the time
-        given
-        by 5 seconds.
-        <p>Your score will be logged as the number of seconds remaining when quiz is completed.</p>
-      </h2>
-      <h4>Are You Ready? </h4>
-      <!-- <div class="wrapper"> -->
-        <!-- <div class="button"> -->
-          <!-- <button onlick="startQuiz( )">Start Quiz</button>
-    </section> -->
-
-    <!--Insert section for quiz questions, alerts for right vs wrong, and quiz results  -->
-<!-- 
-    <section id="quizQuestions" class="hide">
-      <div class = "row">
-        <h2 id = "mainTitle"></h2>
-      <input type = "button" button id="choicesButton"></button>
-      </div>
-      <div class = "row"> </div>
-        <div id = "choices"></div>
-        <div id = "alertUser"></div>
-    </section>
-    <!-- Insert section for input of user  initials and submit score button to listOfHighScores -->
-      <!-- <section id = "userScore" class = "hide">
-        <div class = "row"></div>
-        <!-- <div id = "userScore"></div> -->
-      <!-- </section> --> --> -->
-
-
-<!-- 
-      <section id = "finalScorePage" class = hide>
-        <div class = "row">
-          <h2>Quiz Complete!
-            <p>Final Score: <span id</p>
-          </h2>
-          <div id = "enterInititals"></div>
-          <input type="text" id="initials" placeholder="Enter your initials here."></input>
-        </div>
-      </section>
- 
-  </main>
-  <script src="./assets/script.js"></script>
-</body>
-
-</html> --> -->

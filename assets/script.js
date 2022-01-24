@@ -1,184 +1,161 @@
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and my score
+
+const beginButton = document.getElementById('begin-btn');
+const nextButton = document.getElementById('next-btn');
+const questionContainerElement = document.getElementById('question-container');
+const questionElement = document.getElementById('question');
+const answerButtonsElement = document.getElementById('answer-buttons');
 
 
+let shuffledQuestions, currentQuestionIndex;
 
-var quizQuestionsEl = document.querySelector("#quizQuestions");
-
-
-var questions = [ 
-    {
-        asked: "Which structure of code allows you to repeat the same action or actions a specified number of times?",
-        choices: [ "repeat" , "for loop",   "do while", "do loop"],
-        answerIndex: 1,
-    },
-    {
-        asked: "Which scope is at the top level and applies to all code below?",
-        choices: ["National", "Worldly",  "Global", "Above All"],
-        answerIndex: 2,
-    },
-    {
-        asked: "Which method joins several arrays and returns a new one?",
-        choices: ["filter", "replace", "push", "concat"],
-        answerIndex: 3,
-    },
-    {
-        asked: "Which method adds a new element at the end of an array?",
-        choices: ["appendChild", "push", "map", "sort"],
-        answerIndex: 1,
-    },
-    {
-        asked: "Which function open up 'OK/Cancel' within the browser window and returns a boolean?",
-        choices: ["alert", "prompt", "confirm", "notify"],
-        answerIndex: 2,
-    },
-    {
-        asked: "Name the function that will break up a string and return an integer.",
-        choices: ["breakInt", "parseInt", "number", "sliceInt"],
-        answerIndex: 1,
-    },
-    {
-        asked: "What is DOM short for?",
-        choices: ["Dungeon of Magicians", "Document of Methods", "Document Object Model", "Division of Methods"],
-        answerIndex: 2,
-    },
-    {
-        asked: "Which method adds list items to the end of existing lists that are under the same parent?",
-        choices: ["appendChild", "addChild", "appendParent", "appendCousin"],
-        answerIndex: 0,
-    },
-];
-var userAnswer;
-var choicesEl = document.querySelector("#choices");
-var numbOfQuestion = 0;
-var userScore = 0;
-var enterInititalsEl = document.querySelector("#initials")
-var highScoresButton = document.querySelector(".viewHighScores");
-
-var finalQIndex = questions.length;
-var currentQIndex = 0;
-var userScore = [ ];
-var highScores = [ ];
-var numbOfQuestion = 0;
-var timeRem = 60;
-var timer;
-var correct;
-var timerElement = document.getElementById("timer-count");
-var endGame;
-var highScoresButton = document.querySelector("viewHighScores");
-var startQuizButton = document.querySelector("startButton");
-// var listOfHighScores = [ ]
-
-
-
-function init( ) {}
-highScoresButton.addEventListener("click", function () {
-    document.getElementById("#viewHighScores");
-    var viewHighScores = JSON.parse(localStorage.getItem("userScore"));
-    if (viewHighScores !== null) {
-        userScore = viewHighScores;
-    }
-});
-
-
-startQuizButton.addEventListener("click", function( ) {
-    document.getElementById("#startQuiz");
-    startQuiz();
+beginButton.addEventListener('click', beginQuiz);
+nextButton.addEventListener('click', () => {
+    currentQuestionIndex++
+    setNextQuestion();
 })
 
-
-function startQuiz() {
-    beginTimer ();
-    var containerEl = document.querySelector(".container");
-    containerEl.classList.add("hide");
-    
-    quizQuestionsEl.classList.remove("hide");
-    displayQuestions();
+function beginQuiz  () {
+    beginButton.classList.add('hide')
+    questionContainerElement.classList.remove('hide')
+    shuffledQuestions = questions.sort(() => Math.random() - .5);
+    currentQuestionIndex = 0;
+    setNextQuestion ();
 }
 
-function displayQuestions() {
-    var questionDiv = document.createElement("div");
-    questionDiv.textContent = questions [numbOfQuestion].asked;
-    quizQuestionsEl.append(questionDiv);
+nextButton.addEventListener('click', () => {
+    currentQuestionIndex++;
+    setNextQuestion();
+})
 
-    // create buttons and append them here
-    let choiceBtns = document.createElement("button");
-    button.innerHTML= choicesEl;
-    document.body.appendChild(choiceBtns);
-
+function setNextQuestion () {
+    resetState();
+    showQuestion(shuffledQuestions[currentQuestionIndex]);   
 }
 
-// The setTimer function starts and stops the timer and triggers winGame() and loseGame()
-function beginTimer() {
-    timeRem = 60;
-    timer = setInterval(function () {
-        timeRem--;
-        timerElement.textContent = timeRem;
-
-        // Tests if time has run out
-        if (timeRem=== 0) {
-            // Clears interval
-            clearInterval(timer);
-            timesUp();
+function showQuestion(question) {
+    questionElement.innerText = question.question;
+    question.answers.forEach(answer => {
+        const button = document.createElement('button');
+        button.innerText = answer.text;
+        button.classList.add('btn');
+        if (answer.correct) {
+            button.dataset.correct = answer.correct;
         }
-    }, 1000);
+        button.addEventListener('click', selectAnswer);
+        answerButtonsElement.appendChild(button);
+    })
 }
 
-function questions() {
-    for (i = 0; i < questions.length; i++) {
-        if (choiceBtns = asked.answerIndex) {
-            alert = ("Excellent!");
-        } else {
-            alert = ("Incorrect.");
-            timeRem = -5;
-        }
-        return;
-    };
+function resetState() {
+    clearStatusClass(document.body);
+    nextButton.classList.add('hide');
+    while (answerButtonsElement.firstChild) {
+        answerButtonsElement.removeChild (answerButtonsElement.firstChild);
+    }
 }
 
-    
-
-function endOfGame ( ) {
-    clearInterval(timer);
-    userScore = timeRem;
-    var initialsContainerEl = document.querySelector("initialsContainer");
-    initialsContainerEl.classList.remove("hide");
+function selectAnswer (e) {
+    const selectedButton = e.target;
+    const correct = selectedButton.dataset.correct;
+    setStatusClass(document.body, correct);
+    Array.from(answerButtonsElement.children) .forEach(button => {
+        setStatusClass(button, button.dataset.correct);
+    })
+    if (shuffledQuestions.length > currentQuestionIndex + 1) {
+        nextButton.classList.remove('hide');
+    }
+    else {
+        beginButton.innerText = 'Try Again';
+        beginButton.classList.remove('hide');
+    }
 }
 
-
-
-
-
- 
-function restartQuiz() {
-    clearInterval(timer);
-    userScore = 0;
-    timeRem = 0;
- 
+function setStatusClass(element, correct) {
+    clearStatusClass(element);
+    if (correct){
+        element.classList.add('correct');
+    }
+    else {
+        element.classList.add('wrong');
+    }
 }
 
-function submitScore() {
-
+function clearStatusClass(element) {
+    element.classList.remove('correct');
+    element.classList.remove('wrong');
 }
 
-
-// // var startButton = document.querySelector("#startQuiz");
-var submitScoreButton = document.querySelector("#submitScore");
-// // var restartButton = document.querySelector("#restartQuiz");
-
-
-startButton.addEventListener("click", startQuiz);
-// // // submitScoreButton.addEventListener("click", submitScore);
-// // // highScoresButton.addEventListener("click", viewHighScores);
-// // // restartButton.addEventListener("click", restartQuiz);
-
- init();
+const questions = [
+    {
+        question: "Which structure of code allows you to repeat the same action or actions a specified number of times?",
+        answers: [
+            { text: "repeat", correct: false },
+            { text: "for loop", correct: true },
+            { text: "do while", correct: false },
+            { text: "do loop", correct: false },
+        ]
+    },
+    {
+        question: "Which scope is at the top level and applies to all code below?",
+        answers: [
+            { text: "National", correct: false },
+            { text: "Worldly", correct: false },
+            { text: "Global", correct: true },
+            { text: "Above All", correct: false },
+        ]
+    },
+    {
+        question: "Which method joins several arrays and returns a new one?",
+        answers: [
+            { text: "filter", correct: false },
+            { text: "replace", correct: false },
+            { text: "push", correct: false },
+            { text: "concat", correct: true },
+        ]
+    },
+    {
+        question: "Which method adds a new element at the end of an array?",
+        answers: [
+            { text: "appendChild", correct: false },
+            { text: "push", correct: true },
+            { text: "map", correct: false },
+            { text: "sort", correct: false },
+        ]
+    },
+    {
+        question: "Which function open up 'OK/Cancel' within the browser window and returns a boolean?",
+        answers: [
+            { text: "alert", correct: false },
+            { text: "prompt", correct: false },
+            { text: "confirm", correct: true },
+            { text: "notify", correct: false },
+        ]
+    },
+    {
+        question: "Name the function that will break up a string and return an integer",
+        answers: [
+            { text: "breakInt", correct: false },
+            { text: "parseInt", correct: true },
+            { text: "number", correct: false },
+            { text: "sliceInt", correct: false },
+        ]
+    },
+    {
+        question: "What is DOM short for?",
+        answers: [
+            { text: "Dungeons of Magicians", correct: false },
+            { text: "Document of Methods", correct: false },
+            { text: "Document Object Model", correct: true },
+            { text: "Division of Methods", correct: false },
+        ]
+    },
+    {
+        question: "Which method adds list items to the end of existing lists that are under the same parent?",
+        answers: [
+            { text: "appendChild", correct: true },
+            { text: "addChild", correct: false },
+            { text: "appendParent", correct: false },
+            { text: "appendCousin", correct: false },
+        ]
+     }
+]
