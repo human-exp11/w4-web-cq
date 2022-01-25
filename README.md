@@ -26,4 +26,4 @@ THEN I can save my initials and my score
 
 [Live-site](https://human-exp11.github.io/w4-web-cq/)
 
-![Screenshot](.git images\SS.png)
+![Screenshot](./git images/SS.png)
