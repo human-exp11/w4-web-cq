@@ -1,106 +1,3 @@
-
-const beginButton = document.getElementById('begin-btn');
-const nextButton = document.getElementById('next-btn');
-const questionContainerElement = document.getElementById('question-container');
-const questionElement = document.getElementById('question');
-const answerButtonsElement = document.getElementById('answer-buttons');
-var timerElement = document.getElementById('timer-count');
-
-
-let shuffledQuestions, currentQuestionIndex;
-
-//The setTimer function starts and stops the timer and triggers winGame() and loseGame()
-function beginTimer() {
-    timeRem = 60;
-    timer = setInterval(function () {
-    timeRem--;
-    timerElement.textContent = timeRem;
-//Tests if time has run out
-         if (timeRem=== 0) {
-// Clears interval
-             clearInterval(timer);
-             timesUp();
-       }
-  }, 1000);
-}
-
-beginButton.addEventListener('click', beginQuiz);
-nextButton.addEventListener('click', () => {
-    currentQuestionIndex++
-    setNextQuestion();
-})
-
-function beginQuiz  () {
-    beginButton.classList.add('hide')
-    questionContainerElement.classList.remove('hide')
-    shuffledQuestions = questions.sort(() => Math.random() - .5);
-    currentQuestionIndex = 0;
-    setNextQuestion ();
-}
-
-nextButton.addEventListener('click', () => {
-    currentQuestionIndex++;
-    setNextQuestion();
-})
-
-function setNextQuestion () {
-    resetState();
-    showQuestion(shuffledQuestions[currentQuestionIndex]);   
-}
-
-function showQuestion(question) {
-    questionElement.innerText = question.question;
-    question.answers.forEach(answer => {
-        const button = document.createElement('button');
-        button.innerText = answer.text;
-        button.classList.add('btn');
-        if (answer.correct) {
-            button.dataset.correct = answer.correct;
-        }
-        button.addEventListener('click', selectAnswer);
-        answerButtonsElement.appendChild(button);
-    })
-}
-
-function resetState() {
-    clearStatusClass(document.body);
-    nextButton.classList.add('hide');
-    while (answerButtonsElement.firstChild) {
-        answerButtonsElement.removeChild (answerButtonsElement.firstChild);
-    }
-}
-
-function selectAnswer (e) {
-    const selectedButton = e.target;
-    const correct = selectedButton.dataset.correct;
-    setStatusClass(document.body, correct);
-    Array.from(answerButtonsElement.children) .forEach(button => {
-        setStatusClass(button, button.dataset.correct);
-    })
-    if (shuffledQuestions.length > currentQuestionIndex + 1) {
-        nextButton.classList.remove('hide');
-    }
-    else {
-        beginButton.innerText = 'Try Again';
-        beginButton.classList.remove('hide');
-    }
-}
-
-function setStatusClass(element, correct) {
-    clearStatusClass(element);
-    if (correct){
-        element.classList.add('correct');
-    }
-    else {
-        element.classList.add('wrong');
-    }
-}
-
-function clearStatusClass(element) {
-    element.classList.remove('correct');
-    element.classList.remove('wrong');
-}
-
 const questions = [
     {
         question: "Which structure of code allows you to repeat the same action or actions a specified number of times?",
@@ -175,3 +72,92 @@ const questions = [
         ]
      }
 ]
+
+
+const beginButton = document.getElementById('begin-btn');
+const nextButton = document.getElementById('next-btn');
+const questionContainerElement = document.getElementById('question-container');
+const questionElement = document.getElementById('question');
+const answerButtonsElement = document.getElementById('answer-buttons');
+
+showQuestion;
+setNextQuestion;
+let shuffledQuestions, currentQuestionIndex;
+
+beginButton.addEventListener('click', beginQuiz);
+nextButton.addEventListener('click', () => {
+    currentQuestionIndex++
+    setNextQuestion();
+})
+
+function beginQuiz  () {
+    beginButton.classList.add('hide')
+    questionContainerElement.classList.remove('hide')
+    shuffledQuestions = questions.sort(() => Math.random() - .5);
+    currentQuestionIndex = 0;
+    setNextQuestion ();
+}
+
+nextButton.addEventListener('click', () => {
+    currentQuestionIndex++;
+    setNextQuestion();
+})
+
+function setNextQuestion () {
+    resetState();
+    showQuestion(shuffledQuestions[currentQuestionIndex]);   
+}
+
+function showQuestion(question) {
+    questionElement.innerText = question.question;
+    question.answers.forEach(answer => {
+        const button = document.createElement('button');
+        button.innerText = answer.text;
+        button.classList.add('btn');
+        if (answer.correct) {
+            button.dataset.correct = answer.correct;
+        }
+        button.addEventListener('click', selectAnswer);
+        answerButtonsElement.appendChild(button);
+    })
+}
+
+function resetState() {
+    clearStatusClass(document.body);
+    nextButton.classList.add('hide');
+    while (answerButtonsElement.firstChild) {
+        answerButtonsElement.removeChild (answerButtonsElement.firstChild);
+    }
+}
+
+function selectAnswer (e) {
+    const selectedButton = e.target;
+    const correct = selectedButton.dataset.correct;
+    setStatusClass(document.body, correct);
+    Array.from(answerButtonsElement.children) .forEach(button => {
+        setStatusClass(button, button.dataset.correct);
+    })
+    if (shuffledQuestions.length > currentQuestionIndex + 1) {
+        nextButton.classList.remove('hide');
+    }
+    else {
+        beginButton.innerText = 'Try Again';
+        beginButton.classList.remove('hide');
+    }
+}
+
+function setStatusClass(element, correct) {
+    clearStatusClass(element);
+    if (correct){
+        element.classList.add('correct');
+    }
+    else {
+        element.classList.add('wrong');
+        timeRem -= 5;
+    }
+}
+
+function clearStatusClass(element) {
+    element.classList.remove('correct');
+    element.classList.remove('wrong');
+}
