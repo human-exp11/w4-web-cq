@@ -84,11 +84,36 @@ showQuestion;
 setNextQuestion;
 let shuffledQuestions, currentQuestionIndex;
 
+// quiz to begin once button clicked
 beginButton.addEventListener('click', beginQuiz);
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++
     setNextQuestion();
+    startTimer();
 })
+
+// function startTimer() {
+//     // Sets timer
+//     timer = setInterval(function() {
+//       timeRem--;
+//       timerElement.textContent = timeRem;
+//       if (timeRem >= 0) {
+//         // Tests if win condition is met
+//         if (isWin && timeRem > 0) {
+//           // Clears interval and stops timer
+//           clearInterval(timer);
+//           quizComplete();
+//         }
+//       }
+//       // Tests if time has run out
+//       if (timeRem === 0) {
+//         // Clears interval
+//         clearInterval(timer);
+//         timesUp();
+//       }
+//     }, 1000);
+// }
+
 
 function beginQuiz  () {
     beginButton.classList.add('hide')
@@ -97,6 +122,7 @@ function beginQuiz  () {
     currentQuestionIndex = 0;
     setNextQuestion ();
 }
+
 
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++;
@@ -121,6 +147,9 @@ function showQuestion(question) {
         answerButtonsElement.appendChild(button);
     })
 }
+
+// function timesUp();
+// function quizComplete();
 
 function resetState() {
     clearStatusClass(document.body);
