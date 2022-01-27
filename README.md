@@ -20,10 +20,10 @@ THEN I can save my initials and my score
 * Utilized EventListeners to create buttons linked to the 'click' function
 * Utilized Math.random to shuffle the 8 questions
 * Created functions that were linked to specific CSS data and reflected the user's choice (green for the correct answer, red for the wrong answer)
-* Attempted tp integrate a timer into my JavaScript file that would start counting down from 60 seconds once the user slicked the 'Start' button
-* Attempted to deduct 5 seconds from the timer with each question answered incorrectly
+* Integrated a timer into my JavaScript file that would start counting down from 60 seconds once the user slicked the 'Start' button
+* Deducted 5 seconds from the timer with each question answered incorrectly
 * Created README file with link & screenshot
 
 [Live-site](https://human-exp11.github.io/w4-web-cq/)
 
-![Screenshot](./git images/SS.png)
+![Screenshot](./git-images/SS.png)
