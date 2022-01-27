@@ -72,47 +72,44 @@ const questions = [
         ]
      }
 ]
-
-
+var timer
+var timeRem = 60;
 const beginButton = document.getElementById('begin-btn');
 const nextButton = document.getElementById('next-btn');
 const questionContainerElement = document.getElementById('question-container');
 const questionElement = document.getElementById('question');
 const answerButtonsElement = document.getElementById('answer-buttons');
+var timerElement= document.getElementById('timer-count');
+var isWin = false;
 
-showQuestion;
-setNextQuestion;
+
 let shuffledQuestions, currentQuestionIndex;
 
 // quiz to begin once button clicked
 beginButton.addEventListener('click', beginQuiz);
-nextButton.addEventListener('click', () => {
-    currentQuestionIndex++
-    setNextQuestion();
-    startTimer();
-})
 
-// function startTimer() {
-//     // Sets timer
-//     timer = setInterval(function() {
-//       timeRem--;
-//       timerElement.textContent = timeRem;
-//       if (timeRem >= 0) {
-//         // Tests if win condition is met
-//         if (isWin && timeRem > 0) {
-//           // Clears interval and stops timer
-//           clearInterval(timer);
-//           quizComplete();
-//         }
-//       }
-//       // Tests if time has run out
-//       if (timeRem === 0) {
-//         // Clears interval
-//         clearInterval(timer);
-//         timesUp();
-//       }
-//     }, 1000);
-// }
+
+function startTimer() {
+    // Sets timer
+    timer = setInterval(function() {
+      timeRem--;
+      timerElement.textContent = timeRem;
+      if (timeRem >= 0) {
+        // Tests if win condition is met
+        if (isWin && timeRem > 0) {
+          // Clears interval and stops timer
+          clearInterval(timer);
+          quizComplete();
+        }
+      }
+      // Tests if time has run out
+      if (timeRem<= 0) {
+        // Clears interval
+        clearInterval(timer);
+        timesUp();
+      }
+    }, 1000);
+}
 
 
 function beginQuiz  () {
@@ -121,20 +118,24 @@ function beginQuiz  () {
     shuffledQuestions = questions.sort(() => Math.random() - .5);
     currentQuestionIndex = 0;
     setNextQuestion ();
+    startTimer();
 }
 
 
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++;
+    console.log("buttonClick");
     setNextQuestion();
 })
 
 function setNextQuestion () {
     resetState();
+    console.log(currentQuestionIndex);
     showQuestion(shuffledQuestions[currentQuestionIndex]);   
 }
 
 function showQuestion(question) {
+    console.log(question);
     questionElement.innerText = question.question;
     question.answers.forEach(answer => {
         const button = document.createElement('button');
@@ -162,10 +163,9 @@ function resetState() {
 function selectAnswer (e) {
     const selectedButton = e.target;
     const correct = selectedButton.dataset.correct;
-    setStatusClass(document.body, correct);
-    Array.from(answerButtonsElement.children) .forEach(button => {
-        setStatusClass(button, button.dataset.correct);
-    })
+    // Array.from(answerButtonsElement.children) .forEach(button => {
+    setStatusClass(selectedButton, correct);
+    // })
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove('hide');
     }
@@ -176,13 +176,13 @@ function selectAnswer (e) {
 }
 
 function setStatusClass(element, correct) {
-    clearStatusClass(element);
+    clearStatusClass(document.body);
     if (correct){
-        element.classList.add('correct');
+        document.body.classList.add('correct');
     }
     else {
-        element.classList.add('wrong');
-        timeRem -= 5;
+        document.body.classList.add('wrong');
+        timeRem  = timeRem -5;
     }
 }
 

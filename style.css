@@ -6,12 +6,16 @@
 :root{
     background-color: rgb(224, 233, 253);
 }
+/* nav {
+    flex:0 0 100%;
+} */
 
 body {
     background-color: rgb(74, 74, 145) ;
     padding: 0;
     margin: 0;
     display: flex;
+    flex-direction: column;
     width : 100vw;
     height: 100vh;
     justify-content: center;
