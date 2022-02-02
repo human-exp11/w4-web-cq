@@ -1,42 +1,42 @@
-const questions = [
+var questions = [
     {
-        question: "Which structure of code allows you to repeat the same action or actions a specified number of times?",
-        choices: [  "repeat",  "for loop",  "do while", "do loop" ],
+        title: "Which structure of code allows you to repeat the same action or actions a specified number of times?",
+        choices: [ {choice: "repeat"}, {choice: "for loop"}, {choice: "do while"}, {choice:"do loop"} ],
         answer: "for loop"
     },
     {
-        question: "Which scope is at the top level and applies to all code below?",
-        choices: [  "National",  "Worldly", "Global",  "Above All" ],
+        title: "Which scope is at the top level and applies to all code below?",
+        choices: [ {choice: "National"}, {choice: "Worldly"}, {choice:"Global"}, {choice: "Above All"} ],
         answer: "Global"
     },
     {
-        question: "Which method joins several arrays and returns a new one?",
-        choicess: [{ choice: "1. filter"},   "replace",  "push",  "concat" ],
+        title: "Which method joins several arrays and returns a new one?",
+        choicess: [{ choice: "filter"}, {choice:  "replace"}  ,  {choice: "push"}, {choice: "concat"}],
         answer: "concat"
     },
     {
-        question: "Which method adds a new element at the end of an array?",
-        choicess: [ "appendChild",  "push",  "map",   "sort" ],
+        title: "Which method adds a new element at the end of an array?",
+        choicess: [{choice: "appendChild"}, {choice: "push"},  {choice: "map"},  {choice: "sort"} ],
         answer: "push"
     },
     {
-        question: "Which function open up 'OK/Cancel' within the browser window and returns a boolean?",
-        choices: [ "alert", "prompt", "confirm",  "notify" ],
+        title: "Which function open up 'OK/Cancel' within the browser window and returns a boolean?",
+        choices: [{choice: "alert"}, {choice: "prompt"}, {choice: "confirm"},  {choice:"notify"} ],
         answer:  "prompt"
     },
     {
-        question: "Name the function that will break up a string and return an integer",
-        choices: [  "breakInt", "parseInt", "number",  "sliceInt" ],
+        title: "Name the function that will break up a string and return an integer",
+        choices: [ {choice: "breakInt"}, {choice:"parseInt"}, {choice:"number"}, {choice: "sliceInt"} ],
         answer: "parseInt"
     },
     {
-        question: "What is DOM short for?",
-        choices: [  "Dungeons of Magicians", "Document of Methods",  "Document Object Model", "Division of Methods", ],
+        title: "What is DOM short for?",
+        choices: [ {choice: "Dungeons of Magicians"}, {choice: "Document of Methods"}, {choice: "Document Object Model"}, {choice: "Division of Methods"} ],
         answer: "Document Object Model"
     },
     {
-        question: "Which method adds list items to the end of existing lists that are under the same parent?",
-        choices: [ "appendChild", "addChild",  "appendParent",  "appendCousin", ],
+        title: "Which method adds list items to the end of existing lists that are under the same parent?",
+        choices: [{choice: "appendChild"}, {choice:"addChild"}, {choice: "appendParent"},  {choice: "appendCousin"} ],
         answer: "appendChild"
      }
 ]
@@ -63,6 +63,9 @@ var timerElement= document.getElementById('timer-count');
 var currentQuestionIndex = 0;
 var highScores = [];
 let shuffledQuestions;
+var ulCreate = document.createElement("ul");
+
+
 initialsForm.addEventListener("submit", createUserScore);
 getHighScores;
 
@@ -83,7 +86,7 @@ var startTimer = function () {
             clearInterval (timer);
         }
 
-        if (timeRem < 0) {
+        if (timeRem <= 0) {
             displayScore()
             timerElement.innerText = 0
             clearInterval (timer);
@@ -91,7 +94,6 @@ var startTimer = function () {
 
         }, 1000);
 }
-
 
 function beginQuiz() {
     startContainerElement.classList.add("hide");
@@ -102,15 +104,37 @@ function beginQuiz() {
     shuffledQuestions = questions.sort(() => Math.random() - .5);
     currentQuestionIndex = 0;
     startTimer();
+    render(currentQuestionIndex);
     setNextQuestion();
 }
 
+// Renders questions and choices to page: 
+function render(currentQuestionIndex) {
+    // Clears existing data 
+    questionElement.innerHTML = "";
+    ulCreate.innerHTML = "";
+    // For loops to loop through all info in array
+    for (var i = 0; i < questions.length; i++) {
+        // Appends question title only
+        var userQuestion = questions[currentQuestionIndex].title;
+        var userChoices = questions[currentQuestionIndex].choices;
+        questionContainerElement.textContent = userQuestion;
+    }
+    // New for each for question choices
+    userChoices.forEach(function (newItem) {
+        var listItem = document.createElement("li");
+        listItem.textContent = newItem;
+        questionContainerElement.appendChild(ulCreate);
+        ulCreate.appendChild(listItem);
+        listItem.addEventListener("click", (compareAnswer));
+    })
+}
 
-nextButton.addEventListener("click", () => {
-    currentQuestionIndex++;
-    console.log("buttonClick");
-    setNextQuestion();
-})
+// nextButton.addEventListener("click", (setNextQuestion) {
+//     currentQuestionIndex++;
+//     console.log("buttonClick");
+//     setNextQuestion();
+// })
 
 function setNextQuestion () {
     resetState ()
@@ -125,15 +149,15 @@ function resetState() {
     }
 }
 
-function showQuestion(question) {
-    console.log(question);
-    questionElement.innerText = question.question;
+function showQuestion(title) {
+    console.log(title);
+    questionElement.innerText = questions.title;
     for (var i = 0; i < choices.length; i++) {
         var answerButton = document.createElement("button");
         answerButton.innerText = index.choices[i].choice
         answerButton.classList.add("btn")
         answerButton.classList.add("answerBtn")
-        answerButton.addEventListener("click", selectAnswer)
+        answerButton.addEventListener("click", compareAnswer)
         answerButtonsElement.appendChild(answerButton)
     }
 }
@@ -156,9 +180,9 @@ var ansWrong = function() {
 // function timesUp();
 // function quizComplete();
 
-function selectAnswer (e) {
-    const selectedButton = e.target;
-    if (shuffledQuestions[currentQuestionIndex].answer === selectedButton.innerText) {
+function compareAnswer (e) {
+    const selectedAnswer = e.target;
+    if (shuffledQuestions[currentQuestionIndex].answer === selectedAnswer.innerText) {
         ansCorrect()
         score = score + 5
     }
@@ -182,7 +206,7 @@ currentQuestionIndex++
 
  
 //Display total score screen at end of game
-var showScore = function () {
+function showScore() {
     questionContainerElement.classList.add("hide");
     quizCompleteElement.classList.remove("hide");
     quizCompleteElement.classList.add("show");
@@ -216,15 +240,15 @@ highScores.push(highScore);
 highScores.sort((a, b) => {return b.score-a.score});
 
 //clear visibile list to resort
-// while (listOfHighScoresElement.firstChild) {
-//     listOfHighScoresElement.removeChild(listOfHighScoresElement.firstChild)
-// }
+ while (listOfHighScoresElement.firstChild) {
+     listOfHighScoresElement.removeChild(listOfHighScoresElement.firstChild)
+ }
 //create elements in order of high scores
 for (var i = 0; i < highScores.length; i++) {
   var highScoresElement = document.createElement("li");
   highScoresElement.ClassName = "high-score";
   highScoresElement.innerHTML = highScores[i].initials + " - " + highScores[i].score;
-//   listOfHighScoresElement.appendChild(highScoresElement);
+listOfHighScoresElement.appendChild(highScoresElement);
 }
 
 saveHighScore;

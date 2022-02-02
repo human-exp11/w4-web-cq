@@ -132,7 +132,7 @@ p {
     gap: 10px;
 }
 
-#answer-buttons {
+.answerbtn {
     width: 50%;
     text-align: left;
     font-size: 3.0vw;
