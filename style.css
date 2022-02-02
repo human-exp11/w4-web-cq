@@ -6,9 +6,7 @@
 :root{
     background-color: rgb(224, 233, 253);
 }
-/* nav {
-    flex:0 0 100%;
-} */
+
 
 body {
     background-color: rgb(74, 74, 145) ;
@@ -22,6 +20,19 @@ body {
     align-items:  center;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    width: 85%;
+}
+
+header h4 {
+    padding-left: 20px;
+    font-size: 1.5rem;
+    display: inline;
+}
+
 body.wrong {
     background-color: tomato;
 }
@@ -29,20 +40,102 @@ body.wrong {
      background-color: rgb(101, 133, 101);
 }
 
+.card-timer {
+    font-size: 1.5rem;
+    display: inline;
+    text-align: right;
+    background-color: #a9add3;
+    border-radius: 5px;
+    border: 2px double #cccccc;
+    color: whitesmoke;
+    padding: 5px 10px;   
+}
+
+
 .container {
-    width: 800px;
+    width: 50%;
     max-width: 80%;
     background-color: rgba(240, 245, 247, 0.849); 
     border-radius: 6px;
     box-shadow: 0 0 12px 4px;
     padding: 10px;
+    margin:auto;
+    margin-bottom: 20px;
+    flex-direction: column;
+    padding-bottom: 10px;
 } 
+
+h2 {
+    font-size:1.5rem;
+}
+
+h1 {
+  color: var(--primary);
+  font-size: 2.0rem;
+  font-weight: bold;
+}
+
+p {
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+.start {
+  align-items: center;
+  text-align: center;
+}
+
+.start h1, .start p {
+   text-align: center;
+}
+
+.question {
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 40px 20px;
+    margin: auto;
+}
+
+.end h1, .end p {
+      text-align: left
+}
+
+.end input {
+    outline: thick; 
+    border-width: 1px;
+    padding: 5px;
+    width: 35%;
+    font-size: 2.2rem;
+    border-radius: 5px;
+}
+
+.end input:focus {
+    border: 2px solid var(--secondary);
+}
+
+
+#question {
+    color: var(--primary);
+    text-align: left;
+    font-size: 1.0rem;
+    font-weight: bold;
+}
+
+#high-score {
+    text-align: left;
+}
 
 .grid-for-btns {
     display: grid;
     grid-template-columns: repeat (2, auto);
     margin: 20px 0;
     gap: 10px;
+}
+
+#answer-buttons {
+    width: 50%;
+    text-align: left;
+    font-size: 3.0vw;
 }
 
 .btn {
@@ -57,7 +150,18 @@ body.wrong {
     border-color: black;
 }
 
-.begin-btn, .next-btn, .again-btn, .submit-btn {
+.btn:active {
+    border: none;
+    outline: none;
+    box-shadow: 0 0 grey;
+}
+
+.field {
+    width: 25%;
+    margin-top: 10px;
+}
+
+.begin-btn, .next-btn, .scores-btn, .submit-btn {
     font-size: 1rem;
     font-weight:bold;
     padding: 10px 20px;
@@ -68,6 +172,30 @@ body.wrong {
     justify-content: center;
     align-items: center;
 }
+
 .hide {
     display: none; 
+}
+
+.show {
+    display: flex;
+}
+
+#endGame {
+    text-align: center;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+ol {
+    list-style-type: number;
+}
+
+li:nth-child(odd) {
+     background-color: rgba(228, 151, 164, 0.5);;
+}
+
+li {
+    font-size: 4.0vw;
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,35 +10,59 @@
 </head>
 
 <body>
-  <nav>
-    <div class="card-timer">
-      <h3>Seconds Remaining: </h3>
-      <div id="timer-count">60</div>
-    </div>
-    <div>
-      <button class="view-scores">View High Scores</button>
-      </div>
-    </div>
-  </nav>
 
-    <div class="container">
-      <div id= "question-container" class="hide">
-        <div id="question">Question: </div>
-        <div id="answer-buttons" class="grid-for-btns">
-          <button class="btn">Answer 1</button>
-          <button class="btn">Answer 2</button>
-          <button class="btn">Answer 3</button>
-          <button class="btn">Answer 4</button>
-        </div>
-      </div>
-      <div class="user-controls">
-        <button id="begin-btn" class="begin-btn btn">Begin Quiz</button>
-        <button id="next-btn" class="next-btn btn hide">Next Question</button>
-        <!-- <button id="try-again" class="again-btn btn hide">Try Again</button>
-        <button id="submit-score" class="submit-btn btn hide">Submit Score</button> -->
-      </div>
-     </div>
+  <header>
+    <h4 id="view-high-scores"> <button id="scores-btn" class="scores-btn btn" id="high-score">View High Scores</button>
+    </h4>
+    <h4 class="card-timer">Seconds Remaining: <span id="timer-count"></span></h4>
+  </header>
 
- <script src="script.js"></script>
+  <div id="start-container" class="show">
+    <div class="container start">
+      <h1>Coding Quiz</h1>
+      <p>You will be testing your JavaScript knowledge by answering 8 questions in under 90 seconds. Each question
+        answered correctly will increase your score by 5 points. Each question answering incorrectly will decrease your
+        score by 5 points AND decrease your allotted time by 3 seconds.
+      </p>
+      <h2>Are You Ready?</h2>
+      <button id="begin-btn" class="begin-btn btn">Begin Quiz</button>
+    </div>
+  </div>
+
+  <div id="question-container" class="hide">
+    <div class="container questions">
+      <div id="question"></div>
+      <div id="answer-buttons" class="grid-for-btns"></div>
+    </div>
+  </div>
+
+  <div id="complete-container" class="hide">
+    <div class="container end">
+      <h1>Quiz Complete!</h1>
+    </div>
+    <form id="submit-initials" class="initials">
+      <p> Enter Initials:
+        <input type="text" name="initials" id="initials" class="text-input" />
+        <button class="field" id="sumbit-score" type="submit">Submit</button>
+      </p>
+    </form>
+  </div>
+  </div>
+
+  <div id="high-score-container" class="hide">
+    <div class="high-scores container">
+      <h1 class="high-score">High Scores</h1>
+      <ol id="high-score-list" class="score-list"></ol>
+    </div>
+
+    <div class="hide" id="correct">
+      <h2>Well Done!</h2>
+    </div>
+    <div class="hide" id="wrong">
+      <h2>Incorrect :/</h2>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
